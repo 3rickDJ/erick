@@ -31,6 +31,14 @@ def prepare_image_for_task(image_path):
     image_data = base64.b64encode(image_bytes).decode('utf-8')
     return image_data
 
+def process_image(image_path):
+    image_data = prepare_image_for_task(image_path)
+    result = apply_grayscale_filter.delay(image_data)
+    image = result.get()
+    with open("grayscale_" + image_path, "wb") as image_file:
+        image_file.write(base64.b64decode(image))
+    return image
+
 # Example usage
 if __name__ == "__main__":
     image_path = "pacman.png"
