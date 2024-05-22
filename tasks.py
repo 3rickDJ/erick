@@ -3,7 +3,7 @@ import io
 from celery import Celery
 from PIL import Image
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//', backend='rpc://')
+app = Celery('tasks', broker='pyamqp://erick:erick@3.137.151.50//', backend='rpc://')
 
 @app.task
 def add(x, y):
